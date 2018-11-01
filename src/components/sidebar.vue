@@ -1,10 +1,22 @@
 <template>
-    <div class="container">
+    <div class="sidebar-container">
         <nav class="navbar" role="navigation" aria-label="main navigation">
-            <div class="navbar-menu is-active buttons">
-                <router-link to="/" class="nav-entry"> Übersicht </router-link>
-                <router-link to="/login" class="nav-entry"> Login </router-link>
-                <router-link to="/profile" class="nav-entry"> Profil </router-link>
+            <div class="navbar-menu">
+                <div class="sidebar-logo">
+                    <img src="../assets/logo.png" />
+                </div>
+                <router-link to="/" class="nav-entry">
+                    <img src="../assets/money.svg" />
+                    <div>Übersicht</div>
+                </router-link>
+                <router-link to="/login" class="nav-entry">
+                    <img src="../assets/login.svg" />
+                    <div>Login</div>
+                </router-link>
+                <router-link to="/profile" class="nav-entry">
+                    <img src="../assets/user.svg" />
+                    <div>Profil</div>
+                </router-link>
             </div>
         </nav>
     </div>
@@ -19,13 +31,29 @@
 </script>
 
 <style>
+    .sidebar-logo {
+        max-width: 130px;
+        margin: 30px auto;
+    }
+
+    .sidebar-logo img {
+        max-width: 100%;
+    }
+
     a.nav-entry {
         width: 100%;
-        height: 40px;
-        line-height: 40px;
         display: block;
         color: white;
         text-decoration: none;
         text-align: center;
+        margin-bottom: 40px;
+    }
+
+    a.nav-entry img {
+        max-width: 30px;
+    }
+
+    a.nav-entry div {
+        margin-top: 3px;
     }
 </style>

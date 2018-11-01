@@ -36,22 +36,28 @@ export default {
     body {
         margin: 0;
         height: 100%;
+        font-family: 'Raleway', sans-serif;
+        font-size: 14px;
     }
 
     .outer-wrapper {
-        display: table;
+        display: flex;
         height: 100%;
     }
 
     .left {
         background: #2a3b4d;
         min-width: 200px;
-        display: table-cell;
     }
 
     .right {
         background: #e9e9e9;
-        display: table-cell;
         width: 100%;
+    }
+
+    .headline {
+        font-weight: normal;
+        padding: 0 10%;
+        margin-top: 50px;
     }
 </style>

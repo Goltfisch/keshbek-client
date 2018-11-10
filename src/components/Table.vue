@@ -1,12 +1,14 @@
 <template>
     <table class="overview-table">
         <thead>
-            <th v-for="field in fields">
-                {{ field }}
-            </th>
-            <th>
-                Aktionen
-            </th>
+            <tr>
+                <th v-for="field in fields">
+                    {{ field }}
+                </th>
+                <th>
+                    Aktionen
+                </th>
+            </tr>
         </thead>
         <tbody>
             <tr v-for="item in items">

@@ -16,28 +16,28 @@ import Profile from './pages/Profile.vue';
 import NotFound from './layout/NotFound.vue';
 
 const routes = [
-    { 
-        path: '/login', 
+    {
+        path: '/login',
         component: Login,
     },
-    { 
-        path: '/', 
+    {
+        path: '/',
         component: Layout,
         redirect: '/overview',
         meta: { auth: true },
         children: [
-            { 
-                path: 'overview', 
+            {
+                path: 'overview',
                 component: Overview,
                 meta: { auth: true },
             },
-            { 
-                path: 'profile', 
+            {
+                path: 'profile',
                 component: Profile,
                 meta: { auth: true },
             },
-            { 
-                path: 'page2', 
+            {
+                path: 'page2',
                 component: Profile,
                 meta: { auth: true },
             },

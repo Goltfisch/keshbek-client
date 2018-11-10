@@ -1,8 +1,8 @@
 <template>
-    <div class="sidebar-container">
+    <div class="navigation-container">
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-menu">
-                <div class="sidebar-logo">
+                <div class="navigation-logo">
                     <img src="../assets/logo.png" />
                 </div>
                 <router-link to="/" class="nav-entry">
@@ -31,12 +31,12 @@
 </script>
 
 <style>
-    .sidebar-logo {
+    .navigation-logo {
         max-width: 130px;
         margin: 30px auto;
     }
 
-    .sidebar-logo img {
+    .navigation-logo img {
         max-width: 100%;
     }
 

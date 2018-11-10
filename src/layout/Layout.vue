@@ -1,7 +1,7 @@
 <template>
     <div class="outer-wrapper">
         <div class="left">
-            <div class="sidebar"> <component-sidebar></component-sidebar> </div>
+            <div class="navigation"> <component-navigation></component-navigation> </div>
         </div>
         <div class="right">
             <div class="subnav"> <component-subnav></component-subnav> </div>
@@ -12,13 +12,13 @@
 </template>
 
 <script>
-import ComponentSidebar from './../components/sidebar.vue';
+import ComponentNavigation from './../components/navigation.vue';
 import ComponentSubnav from './../components/subnav.vue';
 import ComponentFooter from './../components/footer.vue';
 
 export default {
     components: {
-        ComponentSidebar,
+        ComponentNavigation,
         ComponentSubnav,
         ComponentFooter
     },

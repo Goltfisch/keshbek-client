@@ -13,16 +13,16 @@
 </template>
 
 <script>
-import ComponentNavigation from './../components/navigation.vue';
-import ComponentFooter from './../components/footer.vue';
+import ComponentNavigation from './../components/Navigation.vue';
+import ComponentFooter from './../components/Footer.vue';
 
 export default {
+    data() {
+        return {}
+    },
     components: {
         ComponentNavigation,
         ComponentFooter
-    },
-    data() {
-        return {}
     }
 }
 </script>

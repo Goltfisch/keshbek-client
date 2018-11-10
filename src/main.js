@@ -8,10 +8,10 @@ Vue.config.productionTip = false;
 
 Vue.use(VueRouter);
 
-import Layout from './layout/Layout.vue';
-import Overview from './pages/Overview.vue';
-import Login from './pages/Login.vue';
-import Profile from './pages/Profile.vue';
+import Layout from './layout/layout.vue';
+import Overview from './pages/overview.vue';
+import Login from './pages/login.vue';
+import Profile from './pages/profile.vue';
 
 const routes = [
     { path: '/', component: Overview },

@@ -1,8 +1,26 @@
 <template>
     <div>
         <h1 class="headline">Transaktionen
-            <button class="add-new-transaction" v-on:click="addNewransaction"><i class="fas fa-plus" style="color: white;"></i></button>
+            <button class="add-new-transaction" v-on:click="onAddTransaction"><i class="fas fa-plus" style="color: white;"></i></button>
         </h1>
+        <div>
+            <form @submit="onAddTransaction">
+                <label>Kreditor ID</label></br>
+                <input type="text" name="creditorId" placeholder="1" v-model="transaction.creditorId" /></br></br>
+                
+                <label>Debitor ID</label></br>
+                <input type="text" name="debitorId" placeholder="2" v-model="transaction.debitorId" /></br></br>
+                
+                <label>Wert</label></br>
+                <input type="text" name="amount" placeholder="" v-model="transaction.amount" /></br></br>
+                
+                <label>Grund</label></br>
+                <input type="text" name="reason" placeholder="Essen" v-model="transaction.reason" /></br></br>
+                
+                <label>Datum</label></br>
+                <input type="text" name="transactionDate" placeholder="01.01.2018" v-model="transaction.date" /></br></br>
+            </form>
+        </div>
         <table class="overview-table">
             <tr>
                 <th>Kreditor</th>
@@ -33,16 +51,35 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {}
-        },
-        methods: {
-            addNewransaction: function(event) {
-                
+export default {
+    data() {
+        return {
+            transaction: {
+                creditorId: '',
+                debitorId: '',
+                amount: '',
+                reason: '',
+                date: '',
             }
         }
+    },
+    methods: {
+        onAddTransaction: function(e) {
+            e.preventDefault();
+            
+            console.log('this.transaction', this.transaction);
+
+            this.axios.post('http://localhost:8000/transaction', this.transaction).then((response) => {
+                console.log(response);
+            });
+
+            // async created() {
+            //     const response = await axios.get('http://localhost:8000/transactions')
+            //     this.transactions = response.data
+            // }
+        }
     }
+}
 </script>
 
 <style>

@@ -8,15 +8,45 @@ Vue.config.productionTip = false;
 
 Vue.use(VueRouter);
 
+import App from './App.vue';
 import Layout from './layout/Layout.vue';
 import Overview from './pages/Overview.vue';
 import Login from './pages/Login.vue';
 import Profile from './pages/Profile.vue';
+import NotFound from './layout/NotFound.vue';
 
 const routes = [
-    { path: '/', component: Overview },
-    { path: '/login', component: Login },
-    { path: '/profile', component: Profile }
+    { 
+        path: '/login', 
+        component: Login,
+    },
+    { 
+        path: '/', 
+        component: Layout,
+        redirect: '/overview',
+        meta: { auth: true },
+        children: [
+            { 
+                path: 'overview', 
+                component: Overview,
+                meta: { auth: true },
+            },
+            { 
+                path: 'profile', 
+                component: Profile,
+                meta: { auth: true },
+            },
+            { 
+                path: 'page2', 
+                component: Profile,
+                meta: { auth: true },
+            },
+        ]
+    },
+    {
+        path: '*',
+        component: NotFound
+    }
 ];
 
 const router = new VueRouter({
@@ -30,7 +60,6 @@ Vue.use(VueAxios, axios);
 Vue.axios.defaults.baseURL = 'http://localhost:8000/api';
 
 Vue.use(VueAuth, {
-    //auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
     auth: {
         request: function (req, token) {
             this.options.http._setHeaders.call(this, req, {Authorization: 'Bearer ' + localStorage.getItem('token')});
@@ -48,5 +77,5 @@ Vue.use(VueAuth, {
 
 new Vue({
     router,
-    render: h => h(Layout),
+    render: h => h(App),
 }).$mount('#app');

@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h1 class="headline">Transaktionen<div class="add-transaction-wrapper"><img src="../assets/add.svg" /></div></h1>
+        <h1 class="headline">Transaktionen
+            <button class="add-new-transaction" v-on:click="addNewransaction"><i class="fas fa-plus" style="color: white;"></i></button>
+        </h1>
         <table class="overview-table">
             <tr>
                 <th>Kreditor</th>
@@ -35,25 +37,21 @@
         data() {
             return {}
         },
+        methods: {
+            addNewransaction: function(event) {
+                console.log('log');
+            }
+        }
     }
 </script>
 
 <style>
-    .add-transaction-wrapper {
-        width: 24px;
-        height: 24px;
+    .add-new-transaction {
+        padding-top: 5px;
         text-align: center;
+        width: 30px;
+        height: 30px;
         background: #00aca9;
-        display: inline-block;
-        margin-left: 10px;
-        position: relative;
-        top: 4px;
-    }
-
-    .add-transaction-wrapper img {
-        width: 14px;
-        position: relative;
-        top: -7px;
     }
 
     .overview-table {

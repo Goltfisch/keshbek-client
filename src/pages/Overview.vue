@@ -39,7 +39,7 @@
         },
         methods: {
             addNewransaction: function(event) {
-                console.log('log');
+                
             }
         }
     }

@@ -4,7 +4,6 @@
             <div class="navigation"> <component-navigation></component-navigation> </div>
         </div>
         <div class="right">
-            <div class="subnav"> <component-subnav></component-subnav> </div>
             <div class="content"> <router-view></router-view> </div>
             <div class="footer"> <component-footer></component-footer> </div>
         </div>
@@ -13,13 +12,11 @@
 
 <script>
 import ComponentNavigation from './../components/navigation.vue';
-import ComponentSubnav from './../components/subnav.vue';
 import ComponentFooter from './../components/footer.vue';
 
 export default {
     components: {
         ComponentNavigation,
-        ComponentSubnav,
         ComponentFooter
     },
     data() {

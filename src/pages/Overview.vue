@@ -18,7 +18,7 @@
                 <input type="text" name="reason" placeholder="Essen" v-model="transaction.reason" /></br></br>
 
                 <label>Datum</label></br>
-                <input type="text" name="transactionDate" placeholder="01.01.2018" v-model="transaction.date" /></br></br>
+                <input type="text" name="transactionDate" placeholder="01.01.2018" v-model="transaction.transactionDate" /></br></br>
             </form>
         </div>
         <component-table :fields="fields" :items="items"></component-table>
@@ -45,7 +45,7 @@ export default {
                 debitorId: '',
                 amount: '',
                 reason: '',
-                date: '',
+                transactionDate: '',
             }
         }
     },

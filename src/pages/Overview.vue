@@ -21,7 +21,7 @@
                 <input type="text" name="transactionDate" placeholder="01.01.2018" v-model="transaction.transactionDate" /></br></br>
             </form>
         </div>
-        <component-table :fields="fields" :items="items"></component-table>
+        <component-table :fields="fields" :items="items" :isLoading="isLoading"></component-table>
     </div>
 </template>
 
@@ -30,16 +30,12 @@ import ComponentTable from './../components/Table.vue';
 
 const fields = [ 'Kreditor', 'Debitor', 'Menge', 'Grund', 'Datum' ]
 
-const items = [
-    { id: 1, creditor: 'Alexander', debitor: 'Ewald', amount: 500, reason: 'Du weißt Bescheid', date: '01.11.2018' },
-    { id: 2, creditor: 'Nicole', debitor: 'Daniel', amount: 3.99, reason: 'Schokoriegel', date: '09.11.2018' }
-]
-
 export default {
     data() {
         return {
             fields: fields,
-            items: items,
+            items: [],
+            isLoading: true,
             transaction: {
                 creditorId: '',
                 debitorId: '',
@@ -49,20 +45,22 @@ export default {
             }
         }
     },
+    mounted() {
+        this.axios.get('http://localhost:8000/api/transaction', {}).then(response => {
+            console.log(response.data);
+            this.isLoading = false;
+            this.items = response.data;
+        });
+    },
     methods: {
         onAddTransaction: function(e) {
             e.preventDefault();
 
-            console.log('this.transaction', this.transaction);
-
             this.axios.post('http://localhost:8000/transaction', this.transaction).then((response) => {
-                console.log(response);
+                this.items.push(response.data);
+            }).catch(error => {
+                console.log('errors', error);
             });
-
-            // async created() {
-            //     const response = await axios.get('http://localhost:8000/transactions')
-            //     this.transactions = response.data
-            // }
         }
     },
     components: {

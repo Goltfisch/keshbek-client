@@ -20,7 +20,7 @@
                     <td>{{ item.debitor }}</td>
                     <td>{{ item.amount }}</td>
                     <td>{{ item.reason }}</td>
-                    <td>{{ item.transactionDate }}</td>
+                    <td>{{ formatDate(item.transactionDate) }}</td>
                     <td>
                         <span v-on:click="onEdit(item.id)">Bearbeiten</span> / 
                         <span v-on:click="onDelete(item.id)">Löschen</span>
@@ -32,33 +32,38 @@
 </template>
 
 <script>
-    export default{
-        data() {
-            return {}
+import moment from 'moment';
+
+export default{
+    data() {
+        return {}
+    },
+    props: {
+        fields: {
+            type: Array,
+            required: true
         },
-        props: {
-            fields: {
-                type: Array,
-                required: true
-            },
-            items: {
-                type: Array,
-                required: true
-            },
-            isLoading: {
-                type: Boolean,
-                required: true
-            }
+        items: {
+            type: Array,
+            required: true
         },
-        methods: {
-            onEdit: function(rowId) {
-                console.log(rowId);
-            },
-            onDelete: function(rowId) {
-                console.log(rowId)
-            }
+        isLoading: {
+            type: Boolean,
+            required: true
+        }
+    },
+    methods: {
+        formatDate: function(dateObject) {
+            return moment(dateObject.date).format('DD.MM.YYYY');
+        },
+        onEdit: function(rowId) {
+            console.log(rowId);
+        },
+        onDelete: function(rowId) {
+            console.log(rowId)
         }
     }
+}
 </script>
 
 <style></style>

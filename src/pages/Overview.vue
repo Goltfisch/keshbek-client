@@ -47,7 +47,6 @@ export default {
     },
     mounted() {
         this.axios.get('http://localhost:8000/api/transaction', {}).then(response => {
-            console.log(response.data);
             this.isLoading = false;
             this.items = response.data;
         });
@@ -58,6 +57,13 @@ export default {
 
             this.axios.post('http://localhost:8000/transaction', this.transaction).then((response) => {
                 this.items.push(response.data);
+                this.transaction = {
+                    creditorId: '',
+                    debitorId: '',
+                    amount: '',
+                    reason: '',
+                    transactionDate: '',
+                };
             }).catch(error => {
                 console.log('errors', error);
             });

@@ -6,7 +6,7 @@
         <table class="overview-table">
             <thead>
                 <tr>
-                    <th v-for="field in fields">
+                    <th v-for="field in fields" :key="field">
                         {{ field }}
                     </th>
                     <th>
@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in items">
+                <tr v-for="item in items" :key="item.id">
                     <td>{{ item.creditor }}</td>
                     <td>{{ item.debitor }}</td>
                     <td>{{ item.amount }}</td>

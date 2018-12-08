@@ -67,7 +67,7 @@
                             this.errors["auth"] = "Ein ungekannter Fehler ist aufgetreten.";
                         }
 
-                        console.log(this.errors);
+                        this.$forceUpdate();
                     }
                 })
             }

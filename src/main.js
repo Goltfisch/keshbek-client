@@ -19,6 +19,7 @@ const routes = [
     {
         path: '/login',
         component: Login,
+        name: 'login'
     },
     {
         path: '/',
@@ -29,16 +30,13 @@ const routes = [
             {
                 path: 'overview',
                 component: Overview,
+                name: 'overview',
                 meta: { auth: true },
             },
             {
                 path: 'profile',
                 component: Profile,
-                meta: { auth: true },
-            },
-            {
-                path: 'page2',
-                component: Profile,
+                name: 'profile',
                 meta: { auth: true },
             },
         ]

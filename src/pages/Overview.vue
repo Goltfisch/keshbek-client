@@ -1,25 +1,28 @@
 <template>
     <div>
-        <component-modal v-if="showTransactionModal" @close="onAddTransaction">
+        <component-modal v-if="showTransactionModal" @close="onCloseTransactionModal">
             <h3 slot="header">Neue Transaktion erstellen</h3>
             <div slot="body">
-                <form @submit="onAddTransaction">
-                    <label>Kreditor ID</label></br>
-                    <input type="text" name="creditorId" placeholder="1" v-model="transaction.creditorId" /></br></br>
+                <form @submit.prevent="onAddTransaction" class="form">
+                    <label>Kreditor ID</label>
+                    <input type="text" name="creditorId" placeholder="1" v-model="transaction.creditorId" />
 
-                    <label>Debitor ID</label></br>
-                    <input type="text" name="debitorId" placeholder="2" v-model="transaction.debitorId" /></br></br>
+                    <label>Debitor ID</label>
+                    <input type="text" name="debitorId" placeholder="2" v-model="transaction.debitorId" />
 
-                    <label>Wert</label></br>
-                    <input type="text" name="amount" placeholder="" v-model="transaction.amount" /></br></br>
+                    <label>Wert</label>
+                    <input type="text" name="amount" placeholder="" v-model="transaction.amount" />
 
-                    <label>Grund</label></br>
-                    <input type="text" name="reason" placeholder="Essen" v-model="transaction.reason" /></br></br>
+                    <label>Grund</label>
+                    <input type="text" name="reason" placeholder="Essen" v-model="transaction.reason" />
 
-                    <label>Datum</label></br>
-                    <input type="text" name="transactionDate" placeholder="01.01.2018" v-model="transaction.transactionDate" /></br></br>
+                    <label>Datum</label>
+                    <input type="text" name="transactionDate" placeholder="01.01.2018" v-model="transaction.transactionDate" />
                 </form>
             </div>
+            <button slot="footer" class="modal-default-button" @click="onAddTransaction">
+                Hinzufügen
+            </button>
         </component-modal>
 
         <h1 class="headline">
@@ -60,8 +63,6 @@ export default {
     },
     methods: {
         onAddTransaction: function(e) {
-            e.preventDefault();
-
             this.axios.post('http://localhost:8000/transaction', this.transaction).then((response) => {
                 this.items.push(response.data);
                 this.transaction = {
@@ -76,6 +77,9 @@ export default {
             }).catch(error => {
                 console.log('errors', error);
             });
+        },
+        onCloseTransactionModal: function() {
+            this.showTransactionModal = false;
         }
     },
     components: {
@@ -105,5 +109,16 @@ export default {
         display: block;
         width: 100%;
         content: "";
+    }
+
+    .form label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form input {
+        display: block;
+        width: 100%;
+        margin-bottom: 20px;
     }
 </style>

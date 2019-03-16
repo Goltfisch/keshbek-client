@@ -6,6 +6,7 @@
                     <slot name="header">
                         default header
                     </slot>
+                    <button class="modal-close-button" @click="$emit('close')"><i class="fas fa-times"></i></button>
                 </div>
 
                 <div class="modal-body">
@@ -16,10 +17,10 @@
 
                 <div class="modal-footer">
                     <slot name="footer">
-                    default footer
-                    <button class="modal-default-button" @click="$emit('close')">
-                        OK
-                    </button>
+                        default footer
+                        <button class="modal-default-button">
+                            OK
+                        </button>
                     </slot>
                 </div>
             </div>
@@ -58,19 +59,21 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
         transition: all .3s ease;
         font-family: Helvetica, Arial, sans-serif;
+        position: relative;
     }
 
     .modal-header h3 {
         margin-top: 0;
-        color: #42b983;
+        color: #00aca9;
     }
 
     .modal-body {
         margin: 20px 0;
     }
 
-    .modal-default-button {
-        float: right;
+    .modal-footer {
+        display: flex;
+        justify-content: flex-end;
     }
 
     .modal-enter {
@@ -85,5 +88,24 @@
     .modal-leave-active .modal-container {
         -webkit-transform: scale(1.1);
         transform: scale(1.1);
+    }
+
+    .modal-default-button {
+        background-color: #00aca9;
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+        padding: 5px;
+    }
+
+    .modal-close-button {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        padding: 10px;
+        border: 0;
+        outline: 0;
+        background: none;
+        cursor: pointer;
     }
 </style>

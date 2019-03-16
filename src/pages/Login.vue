@@ -36,7 +36,7 @@
         methods: {
             onLogin: function(e) {
                 e.preventDefault();
-                
+
                 this.errors = {};
 
                 if (!this.login._username) {
@@ -49,10 +49,10 @@
 
                 if (Object.keys(this.errors).length !== 0) {
                     return;
-                } 
+                }
 
                 const data = {
-                    username: this.login._username, 
+                    username: this.login._username,
                     password: this.login._password
                 };
 
@@ -104,7 +104,7 @@
         color: #3e3e3e;
     }
 
-    .form-wrapper {
+    .login-wrapper .form-wrapper {
         width: 500px;
         margin: 0 auto;
         top: 50%;
@@ -117,11 +117,11 @@
         box-shadow: 0px 4px 10px 4px rgba(0, 0, 0, 0.3);
     }
 
-    .form-wrapper form {
+    .login-wrapper .form-wrapper form {
         width: 75%;
         margin: 0 auto;
     }
-    
+
     .login-label {
         font-size: 12px;
         margin-left: 20px;

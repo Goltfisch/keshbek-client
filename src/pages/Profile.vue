@@ -1,6 +1,6 @@
 <template>
     <div>
-        profil
+        <h1 class="headline">Profile</h1>
     </div>
 </template>
 

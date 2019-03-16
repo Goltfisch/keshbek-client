@@ -22,7 +22,7 @@
                     <td>{{ item.reason }}</td>
                     <td>{{ formatDate(item.transactionDate) }}</td>
                     <td>
-                        <span v-on:click="onEdit(item.id)">Bearbeiten</span> / 
+                        <span v-on:click="$emit('openEditModal', item.id)">Bearbeiten</span> / 
                         <span v-on:click="onDelete(item.id)">Löschen</span>
                     </td>
                 </tr>

@@ -5,15 +5,15 @@
                 <div class="navigation-logo">
                     <img src="../assets/logo.png" />
                 </div>
-                <router-link to="/" class="nav-entry">
+                <router-link class="nav-entry" :to="{ name: 'overview' }">
                     <img src="../assets/money.svg" />
                     <div>Übersicht</div>
                 </router-link>
-                <router-link to="/login" class="nav-entry">
+                <router-link class="nav-entry" :to="{ name: 'login' }">
                     <img src="../assets/login.svg" />
                     <div>Login</div>
                 </router-link>
-                <router-link to="/profile" class="nav-entry">
+                <router-link class="nav-entry" :to="{ name: 'profile' }">
                     <img src="../assets/user.svg" />
                     <div>Profil</div>
                 </router-link>

@@ -3,39 +3,23 @@
         <component-modal v-if="showTransactionModal" @close="onCloseTransactionModal">
             <h3 slot="header">Neue Transaktion erstellen</h3>
             <div slot="body">
-                <form @submit.prevent="onAddTransaction" class="form">
-                    <label>Kreditor ID</label>
-                    <input type="text" name="creditorId" placeholder="1" v-model="transaction.creditorId" />
-
-                    <label>Debitor ID</label>
-                    <input type="text" name="debitorId" placeholder="2" v-model="transaction.debitorId" />
-
-                    <label>Wert</label>
-                    <input type="text" name="amount" placeholder="" v-model="transaction.amount" />
-
-                    <label>Grund</label>
-                    <input type="text" name="reason" placeholder="Essen" v-model="transaction.reason" />
-
-                    <label>Datum</label>
-                    <input type="text" name="transactionDate" placeholder="01.01.2018" v-model="transaction.transactionDate" />
-                </form>
+                <component-form :inputs="formInputs" :button="formButton" :submitHandler="onAddTransaction" v-model="transaction"></component-form>
             </div>
-            <button slot="footer" class="modal-default-button" @click="onAddTransaction">
-                Hinzufügen
-            </button>
+            <button slot="footer"></button>
         </component-modal>
 
         <h1 class="headline">
             Transaktionen
             <button class="add-new-transaction" v-on:click="showTransactionModal = true"><i class="fas fa-plus" style="color: white;"></i></button>
         </h1>
-        <component-table :fields="fields" :items="items" :isLoading="isLoading"></component-table>
+        <component-table v-bind="{fields, items, isLoading}"></component-table>
     </div>
 </template>
 
 <script>
 import ComponentTable from './../components/Table.vue';
 import ComponentModal from './../components/Modal.vue';
+import ComponentForm from './../components/Form.vue';
 
 const fields = [ 'Kreditor', 'Debitor', 'Menge', 'Grund', 'Datum' ]
 
@@ -52,7 +36,9 @@ export default {
                 reason: '',
                 transactionDate: '',
             },
-            showTransactionModal: false
+            showTransactionModal: false,
+            formInputs: [],
+            formButton: {}
         }
     },
     mounted() {
@@ -60,6 +46,43 @@ export default {
             this.isLoading = false;
             this.items = response.data;
         });
+
+        this.formInputs = [
+            {
+                name: 'creditorId',
+                label: 'Kreditor ID',
+                type: 'text',
+                placeholder: '1'
+            },
+            {
+                name: 'debitorId',
+                label: 'Debitor ID',
+                type: 'text',
+                placeholder: '2'
+            },
+            {
+                name: 'amount',
+                label: 'Wert',
+                type: 'text',
+            },
+            {
+                name: 'reason',
+                label: 'Grund',
+                type: 'text',
+                placeholder: 'Essen'
+            },
+            {
+                name: 'transactionDate',
+                label: 'Datum',
+                type: 'text',
+                placeholder: '01.01.2018'
+            }
+        ]
+
+        this.formButton = {
+            text: "Hinzufügen",
+            class: 'modal-default-button'
+        };
     },
     methods: {
         onAddTransaction: function(e) {
@@ -83,7 +106,7 @@ export default {
         }
     },
     components: {
-        ComponentTable, ComponentModal
+        ComponentTable, ComponentModal, ComponentForm
     }
 }
 </script>

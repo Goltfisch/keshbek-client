@@ -3,7 +3,7 @@
         <div>
             <h1 class="headline">Profile</h1>
         </div>
-        <component-form v-bind="{inputs, button, submitHandler}"></component-form>
+        <component-form v-model="profile" v-bind="{inputs, button, submitHandler}"></component-form>
     </div>
 </template>
 
@@ -12,28 +12,39 @@ import ComponentForm from './../components/Form.vue';
 
 export default {
     data: () => ({
-        inputs: [
+        profile: {
+            firstName: 'daniel',
+            secondName: undefined,
+        },
+        inputs: [],
+        button: {}
+    }),
+    methods: {
+        submitHandler: function(e) {
+            console.log(this.profile.firstName);
+            console.log(this.profile.secondName);
+        }
+    },
+    mounted() {
+        this.inputs = [
             {
                 name: 'firstName',
                 label: 'Vorname',
                 type: 'text',
-                value: ''
+                placeholder: 'Daniel',
+                model: this.profile.firstName
             },
             {
                 name: 'secondName',
                 label: 'Nachname',
                 type: 'text',
-                value: ''
+                placeholder: 'Wolf'
             }
-        ],
-        button: {
+        ];
+
+        this.button = {
             text: 'Speichern'
-        }
-    }),
-    methods: {
-        submitHandler: () => {
-            console.log('Profile-form was submitted!');
-        }
+        };
     },
     components: {
         ComponentForm

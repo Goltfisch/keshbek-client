@@ -23,7 +23,7 @@
                     <td>{{ formatDate(item.transactionDate) }}</td>
                     <td>
                         <span v-on:click="$emit('openEditModal', item.id)">Bearbeiten</span> / 
-                        <span v-on:click="onDelete(item.id)">Löschen</span>
+                        <span v-on:click="$emit('onDeleteClick', item.id)">Löschen</span>
                     </td>
                 </tr>
             </tbody>
@@ -55,12 +55,6 @@ export default{
     methods: {
         formatDate: function(dateObject) {
             return moment(dateObject.date).format('DD.MM.YYYY');
-        },
-        onEdit: function(rowId) {
-            console.log(rowId);
-        },
-        onDelete: function(rowId) {
-            console.log(rowId)
         }
     }
 }

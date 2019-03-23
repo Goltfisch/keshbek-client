@@ -19,7 +19,7 @@
 <script>
 import ComponentTable from './../components/Table.vue';
 import ComponentModal from './../components/Modal.vue';
-import ComponentForm from './../components/Form.vue';
+import ComponentForm from './../components/form/Form.vue';
 
 const fields = [ 'Kreditor', 'Debitor', 'Menge', 'Grund', 'Datum' ]
 

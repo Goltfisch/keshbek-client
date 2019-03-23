@@ -3,51 +3,38 @@
         <div>
             <h1 class="headline">Profile</h1>
         </div>
-        <component-form v-model="profile" v-bind="{inputs, button, submitHandler}"></component-form>
+        <component-form :submitHandler="submitHandler">
+            <component-form-input name="firstName" label="Vorname" placeholder="Daniel" v-model="profile.firstName"></component-form-input>
+            <component-form-input name="secondName" label="Nachname" placeholder="Wolf" v-model="profile.secondName"></component-form-input>
+
+            <template slot="button">
+                <button type="submit" name="submit">
+                    Speichern
+                </button>
+            </template>
+        </component-form>
     </div>
 </template>
 
 <script>
-import ComponentForm from './../components/Form.vue';
+import ComponentForm from './../components/form/Form.vue';
+import ComponentFormInput from './../components/form/FormInput.vue';
 
 export default {
     data: () => ({
         profile: {
-            firstName: 'daniel',
+            firstName: undefined,
             secondName: undefined,
         },
-        inputs: [],
-        button: {}
     }),
     methods: {
         submitHandler: function(e) {
             console.log(this.profile.firstName);
-            console.log(this.profile.secondName);
         }
     },
-    mounted() {
-        this.inputs = [
-            {
-                name: 'firstName',
-                label: 'Vorname',
-                type: 'text',
-                placeholder: 'Daniel',
-                model: this.profile.firstName
-            },
-            {
-                name: 'secondName',
-                label: 'Nachname',
-                type: 'text',
-                placeholder: 'Wolf'
-            }
-        ];
-
-        this.button = {
-            text: 'Speichern'
-        };
-    },
     components: {
-        ComponentForm
+        ComponentForm,
+        ComponentFormInput
     }
 }
 </script>

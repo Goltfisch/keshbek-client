@@ -42,7 +42,7 @@
                     <input type="text" name="reason" placeholder="Essen" v-model="transaction.reason" />
 
                     <label>Datum</label>
-                    <input type="text" name="transactionDate" placeholder="01.01.2018" v-model="transaction.transactionDate" />
+                    <input type="text" name="transactionDate" placeholder="01.01.2019" v-model="transaction.transactionDate" />
                 </form>
             </div>
             <button slot="footer" class="modal-default-button" @click="onSaveTransaction">
@@ -53,8 +53,9 @@
         <h1 class="headline">
             Transaktionen
             <button class="add-new-transaction" @click="onOpenTransactionModal"><i class="fas fa-plus" style="color: white;"></i></button>
+            <button class="generate-demo-data" @click="onGenerateDemoData"><i class="fas fa-database"></i></button>
         </h1>
-        <component-table :fields="fields" :items="items" :isLoading="isLoading" @openEditModal="onOpenEditModal"></component-table>
+        <component-table :fields="fields" :items="items" :isLoading="isLoading" @openEditModal="onOpenEditModal" @onDeleteClick="onDeleteClick"></component-table>
     </div>
 </template>
 
@@ -64,7 +65,7 @@ import moment from 'moment';
 import ComponentTable from './../components/Table.vue';
 import ComponentModal from './../components/Modal.vue';
 
-const fields = [ 'Kreditor', 'Debitor', 'Menge', 'Grund', 'Datum' ]
+const fields = [ 'Kreditor', 'Debitor', 'Betrag', 'Grund', 'Datum' ]
 
 export default {
     data() {
@@ -155,6 +156,26 @@ export default {
         },
         onCloseEditTransactionModal: function() {
             this.showEditTransactionModal = false;
+        },
+        onDeleteClick: function (itemId) {
+            this.axios.delete('http://localhost:8000/api/transaction/'+itemId).then((response) => {
+                if(response) {
+                    this.items = this.items.filter(function(item) {
+                        return item.id !== itemId;
+                    });
+                }
+            }).catch(error => {
+                console.log('errors', error);
+            });
+        },
+        onGenerateDemoData: function () {
+            this.axios.get('http://localhost:8000/api/transaction/demo/', {}).then((response) => {
+                if(response) {
+                    console.log('added demo data');
+                }
+            }).catch(error => {
+                console.log('errors', error);
+            });
         }
     },
     components: {

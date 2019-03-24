@@ -3,7 +3,43 @@
         <component-modal v-if="showTransactionModal" @close="onCloseTransactionModal">
             <h3 slot="header">Neue Transaktion erstellen</h3>
             <div slot="body">
-                <component-form :inputs="formInputs" :button="formButton" :submitHandler="onAddTransaction" v-model="transaction"></component-form>
+                <component-form :submitHandler="onAddTransaction">
+                    <component-form-input
+                        name="creditorId"
+                        label="Kreditor ID"
+                        placeholder="1"
+                        v-model="transaction.creditorId">
+                    </component-form-input>
+                    <component-form-input
+                        name="debitorId"
+                        label="Debitor ID"
+                        placeholder="2"
+                        v-model="transaction.debitorId">
+                    </component-form-input>
+                    <component-form-input
+                        name="amount"
+                        label="Wert"
+                        v-model="transaction.amount">
+                    </component-form-input>
+                    <component-form-input
+                        name="reason"
+                        label="Grund"
+                        placeholder="Essen"
+                        v-model="transaction.reason">
+                    </component-form-input>
+                    <component-form-input
+                        name="transactionDate"
+                        label="Datum"
+                        placeholder="01.01.2018"
+                        v-model="transaction.transactionDate">
+                    </component-form-input>
+
+                    <template slot="button">
+                        <button type="submit" name="submit" class="modal-default-button">
+                            Hinzufügen
+                        </button>
+                    </template>
+                </component-form>
             </div>
             <button slot="footer"></button>
         </component-modal>
@@ -20,6 +56,7 @@
 import ComponentTable from './../components/Table.vue';
 import ComponentModal from './../components/Modal.vue';
 import ComponentForm from './../components/form/Form.vue';
+import ComponentFormInput from './../components/form/FormInput.vue';
 
 const fields = [ 'Kreditor', 'Debitor', 'Menge', 'Grund', 'Datum' ]
 
@@ -37,8 +74,6 @@ export default {
                 transactionDate: '',
             },
             showTransactionModal: false,
-            formInputs: [],
-            formButton: {}
         }
     },
     mounted() {
@@ -46,43 +81,6 @@ export default {
             this.isLoading = false;
             this.items = response.data;
         });
-
-        this.formInputs = [
-            {
-                name: 'creditorId',
-                label: 'Kreditor ID',
-                type: 'text',
-                placeholder: '1'
-            },
-            {
-                name: 'debitorId',
-                label: 'Debitor ID',
-                type: 'text',
-                placeholder: '2'
-            },
-            {
-                name: 'amount',
-                label: 'Wert',
-                type: 'text',
-            },
-            {
-                name: 'reason',
-                label: 'Grund',
-                type: 'text',
-                placeholder: 'Essen'
-            },
-            {
-                name: 'transactionDate',
-                label: 'Datum',
-                type: 'text',
-                placeholder: '01.01.2018'
-            }
-        ]
-
-        this.formButton = {
-            text: "Hinzufügen",
-            class: 'modal-default-button'
-        };
     },
     methods: {
         onAddTransaction: function(e) {
@@ -106,7 +104,10 @@ export default {
         }
     },
     components: {
-        ComponentTable, ComponentModal, ComponentForm
+        ComponentTable,
+        ComponentModal,
+        ComponentForm,
+        ComponentFormInput
     }
 }
 </script>

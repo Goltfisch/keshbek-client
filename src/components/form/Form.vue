@@ -50,6 +50,7 @@ export default{
 .form-wrapper input[type=time],
 .form-wrapper input[type=url],
 .form-wrapper input[type=email],
+.form-wrapper input[type=password],
 .form-wrapper textarea,
 .form-wrapper select{
 	box-sizing: border-box;
@@ -73,6 +74,7 @@ export default{
 .form-wrapper input[type=time]:focus,
 .form-wrapper input[type=url]:focus,
 .form-wrapper input[type=email]:focus,
+.form-wrapper input[type=password]:focus,
 .form-wrapper textarea:focus,
 .form-wrapper select:focus{
 	-moz-box-shadow: 0 0 8px #88D5E9;

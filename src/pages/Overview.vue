@@ -52,26 +52,50 @@
         <component-modal v-if="showEditTransactionModal" @close="onCloseEditTransactionModal">
             <h3 slot="header">Transaktion bearbeiten</h3>
             <div slot="body">
-                <form @submit.prevent="onSaveTransaction" class="form">
-                    <label>Kreditor ID</label>
-                    <input type="text" name="creditorId" placeholder="1" v-model="transaction.creditorId" />
+                <component-form :submitHandler="onSaveTransaction">
+                    <component-form-input
+                        name="creditorId"
+                        label="Kreditor ID"
+                        placeholder="1"
+                        required="true"
+                        v-model="transaction.creditorId">
+                    </component-form-input>
+                    <component-form-input
+                        name="debitorId"
+                        label="Debitor ID"
+                        placeholder="2"
+                        required="true"
+                        v-model="transaction.debitorId">
+                    </component-form-input>
+                    <component-form-input
+                        name="amount"
+                        label="Wert"
+                        required="true"
+                        v-model="transaction.amount">
+                    </component-form-input>
+                    <component-form-input
+                        name="reason"
+                        label="Grund"
+                        placeholder="Essen"
+                        required="true"
+                        v-model="transaction.reason">
+                    </component-form-input>
+                    <component-form-input
+                        name="transactionDate"
+                        label="Datum"
+                        placeholder="01.01.2018"
+                        required="true"
+                        v-model="transaction.transactionDate">
+                    </component-form-input>
 
-                    <label>Debitor ID</label>
-                    <input type="text" name="debitorId" placeholder="2" v-model="transaction.debitorId" />
-
-                    <label>Wert</label>
-                    <input type="text" name="amount" placeholder="" v-model="transaction.amount" />
-
-                    <label>Grund</label>
-                    <input type="text" name="reason" placeholder="Essen" v-model="transaction.reason" />
-
-                    <label>Datum</label>
-                    <input type="text" name="transactionDate" placeholder="01.01.2019" v-model="transaction.transactionDate" />
-                </form>
+                    <template slot="button">
+                        <button type="submit" name="submit" class="modal-default-button">
+                            Speichern
+                        </button>
+                    </template>
+                </component-form>
             </div>
-            <button slot="footer" class="modal-default-button" @click="onSaveTransaction">
-                Speichern
-            </button>
+            <div slot="footer"></div>
         </component-modal>
 
         <h1 class="headline">

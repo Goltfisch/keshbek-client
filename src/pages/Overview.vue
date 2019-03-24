@@ -8,29 +8,34 @@
                         name="creditorId"
                         label="Kreditor ID"
                         placeholder="1"
+                        required="true"
                         v-model="transaction.creditorId">
                     </component-form-input>
                     <component-form-input
                         name="debitorId"
                         label="Debitor ID"
                         placeholder="2"
+                        required="true"
                         v-model="transaction.debitorId">
                     </component-form-input>
                     <component-form-input
                         name="amount"
                         label="Wert"
+                        required="true"
                         v-model="transaction.amount">
                     </component-form-input>
                     <component-form-input
                         name="reason"
                         label="Grund"
                         placeholder="Essen"
+                        required="true"
                         v-model="transaction.reason">
                     </component-form-input>
                     <component-form-input
                         name="transactionDate"
                         label="Datum"
                         placeholder="01.01.2018"
+                        required="true"
                         v-model="transaction.transactionDate">
                     </component-form-input>
 
@@ -41,7 +46,7 @@
                     </template>
                 </component-form>
             </div>
-            <button slot="footer"></button>
+            <div slot="footer"></div>
         </component-modal>
 
         <component-modal v-if="showEditTransactionModal" @close="onCloseEditTransactionModal">

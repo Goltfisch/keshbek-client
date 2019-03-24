@@ -68,7 +68,7 @@
     }
 
     .modal-body {
-        margin: 20px 0;
+        margin: 20px 0 0;
     }
 
     .modal-footer {

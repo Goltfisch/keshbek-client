@@ -102,10 +102,7 @@ export default {
                 transactionDate: '',
             },
             showTransactionModal: false,
-<<<<<<< HEAD
             showEditTransactionModal: false,
-=======
->>>>>>> form--add-transaction
         }
     },
     mounted() {

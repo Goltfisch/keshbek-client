@@ -3,40 +3,38 @@
         <div>
             <h1 class="headline">Profile</h1>
         </div>
-        <component-form v-bind="{inputs, button, submitHandler}"></component-form>
+        <component-form :submitHandler="submitHandler">
+            <component-form-input name="firstName" label="Vorname" placeholder="Daniel" v-model="profile.firstName"></component-form-input>
+            <component-form-input name="secondName" label="Nachname" placeholder="Wolf" v-model="profile.secondName"></component-form-input>
+
+            <template slot="button">
+                <button type="submit" name="submit">
+                    Speichern
+                </button>
+            </template>
+        </component-form>
     </div>
 </template>
 
 <script>
-import ComponentForm from './../components/Form.vue';
+import ComponentForm from './../components/form/Form.vue';
+import ComponentFormInput from './../components/form/FormInput.vue';
 
 export default {
     data: () => ({
-        inputs: [
-            {
-                name: 'firstName',
-                label: 'Vorname',
-                type: 'text',
-                value: ''
-            },
-            {
-                name: 'secondName',
-                label: 'Nachname',
-                type: 'text',
-                value: ''
-            }
-        ],
-        button: {
-            text: 'Speichern'
-        }
+        profile: {
+            firstName: undefined,
+            secondName: undefined,
+        },
     }),
     methods: {
-        submitHandler: () => {
-            console.log('Profile-form was submitted!');
+        submitHandler: function(e) {
+            console.log(this.profile.firstName);
         }
     },
     components: {
-        ComponentForm
+        ComponentForm,
+        ComponentFormInput
     }
 }
 </script>

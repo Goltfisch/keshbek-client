@@ -3,26 +3,45 @@
         <component-modal v-if="showTransactionModal" @close="onCloseTransactionModal">
             <h3 slot="header">Neue Transaktion erstellen</h3>
             <div slot="body">
-                <form @submit.prevent="onAddTransaction" class="form">
-                    <label>Kreditor ID</label>
-                    <input type="text" name="creditorId" placeholder="1" v-model="transaction.creditorId" />
+                <component-form :submitHandler="onAddTransaction">
+                    <component-form-input
+                        name="creditorId"
+                        label="Kreditor ID"
+                        placeholder="1"
+                        v-model="transaction.creditorId">
+                    </component-form-input>
+                    <component-form-input
+                        name="debitorId"
+                        label="Debitor ID"
+                        placeholder="2"
+                        v-model="transaction.debitorId">
+                    </component-form-input>
+                    <component-form-input
+                        name="amount"
+                        label="Wert"
+                        v-model="transaction.amount">
+                    </component-form-input>
+                    <component-form-input
+                        name="reason"
+                        label="Grund"
+                        placeholder="Essen"
+                        v-model="transaction.reason">
+                    </component-form-input>
+                    <component-form-input
+                        name="transactionDate"
+                        label="Datum"
+                        placeholder="01.01.2018"
+                        v-model="transaction.transactionDate">
+                    </component-form-input>
 
-                    <label>Debitor ID</label>
-                    <input type="text" name="debitorId" placeholder="2" v-model="transaction.debitorId" />
-
-                    <label>Wert</label>
-                    <input type="text" name="amount" placeholder="" v-model="transaction.amount" />
-
-                    <label>Grund</label>
-                    <input type="text" name="reason" placeholder="Essen" v-model="transaction.reason" />
-
-                    <label>Datum</label>
-                    <input type="text" name="transactionDate" placeholder="01.01.2018" v-model="transaction.transactionDate" />
-                </form>
+                    <template slot="button">
+                        <button type="submit" name="submit" class="modal-default-button">
+                            Hinzufügen
+                        </button>
+                    </template>
+                </component-form>
             </div>
-            <button slot="footer" class="modal-default-button" @click="onAddTransaction">
-                Hinzufügen
-            </button>
+            <button slot="footer"></button>
         </component-modal>
 
         <component-modal v-if="showEditTransactionModal" @close="onCloseEditTransactionModal">
@@ -55,7 +74,7 @@
             <button class="add-new-transaction" @click="onOpenTransactionModal"><i class="fas fa-plus" style="color: white;"></i></button>
             <button class="generate-demo-data" @click="onGenerateDemoData"><i class="fas fa-database"></i></button>
         </h1>
-        <component-table :fields="fields" :items="items" :isLoading="isLoading" @openEditModal="onOpenEditModal" @onDeleteClick="onDeleteClick"></component-table>
+        <component-table v-bind="{fields, items, isLoading}" @openEditModal="onOpenEditModal" @onDeleteClick="onDeleteClick"></component-table>
     </div>
 </template>
 
@@ -64,6 +83,8 @@ import moment from 'moment';
 
 import ComponentTable from './../components/Table.vue';
 import ComponentModal from './../components/Modal.vue';
+import ComponentForm from './../components/form/Form.vue';
+import ComponentFormInput from './../components/form/FormInput.vue';
 
 const fields = [ 'Kreditor', 'Debitor', 'Betrag', 'Grund', 'Datum' ]
 
@@ -81,7 +102,10 @@ export default {
                 transactionDate: '',
             },
             showTransactionModal: false,
+<<<<<<< HEAD
             showEditTransactionModal: false,
+=======
+>>>>>>> form--add-transaction
         }
     },
     mounted() {
@@ -179,7 +203,10 @@ export default {
         }
     },
     components: {
-        ComponentTable, ComponentModal
+        ComponentTable,
+        ComponentModal,
+        ComponentForm,
+        ComponentFormInput
     }
 }
 </script>

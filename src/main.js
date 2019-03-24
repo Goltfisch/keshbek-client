@@ -3,10 +3,12 @@ import VueRouter from 'vue-router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueAuth from '@websanova/vue-auth';
+import Notifications from 'vue-notification';
 
 Vue.config.productionTip = false;
 
 Vue.use(VueRouter);
+Vue.use(Notifications);
 
 import App from './App.vue';
 import Layout from './layout/Layout.vue';

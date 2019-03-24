@@ -303,20 +303,6 @@ export default {
         background: #00aca9;
     }
 
-    .overview-table {
-        width: 100%;
-        margin: 0 auto;
-        background: white;
-    }
-
-    tr th:after {
-        background: #a9a9a9;
-        height: 2px;
-        display: block;
-        width: 100%;
-        content: "";
-    }
-
     .form label {
         display: block;
         margin-bottom: 5px;

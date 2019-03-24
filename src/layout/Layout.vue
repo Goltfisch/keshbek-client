@@ -50,7 +50,7 @@ export default {
     }
 
     .right {
-        background: #e9e9e9;
+        background: #f7f7fa;
         width: 100%;
     }
 

@@ -30,11 +30,7 @@ export default{
             type: [String, Number],
             required: false
         },
-        required: {
-            type: Boolean,
-            required: false,
-            default: false
-        }
+        required: {}
     },
     methods: {
         handleInput: function(event) {

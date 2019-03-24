@@ -14,7 +14,7 @@
                 <component-form-input
                     name="username"
                     label="Benutzer"
-                    required="true"
+                    required
                     v-model="login.username">
                 </component-form-input>
 
@@ -22,7 +22,7 @@
                     name="password"
                     label="Password"
                     type="password"
-                    required="true"
+                    required
                     v-model="login.password">
                 </component-form-input>
 

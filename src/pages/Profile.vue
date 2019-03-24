@@ -3,16 +3,49 @@
         <div>
             <h1 class="headline">Profile</h1>
         </div>
-        <component-form :submitHandler="submitHandler">
-            <component-form-input name="firstName" label="Vorname" placeholder="Daniel" v-model="profile.firstName"></component-form-input>
-            <component-form-input name="secondName" label="Nachname" placeholder="Wolf" v-model="profile.secondName"></component-form-input>
-
-            <template slot="button">
-                <button type="submit" name="submit">
-                    Speichern
-                </button>
-            </template>
-        </component-form>
+        <div v-if="isLoading">
+            Is loading...
+        </div>
+        <div v-else>
+            <component-form :submitHandler="submitHandler">
+                <component-form-input
+                    name="firstname"
+                    label="Vorname"
+                    v-model="profile.firstname"
+                    required>
+                </component-form-input>
+                <component-form-input
+                    name="lastname"
+                    label="Nachname"
+                    v-model="profile.lastname"
+                    required>
+                </component-form-input>
+                <component-form-input
+                    name="email"
+                    label="Email"
+                    v-model="profile.email"
+                    required>
+                </component-form-input>
+                <component-form-input
+                    name="paypalMeLink"
+                    label="paypal.me Link"
+                    placeholder="https://"
+                    v-model="profile.paypalMeLink"
+                    required>
+                </component-form-input>
+                <component-form-input
+                    name="avatarLink"
+                    label="Avatar Link"
+                    placeholder="https://"
+                    v-model="profile.avatarLink">
+                </component-form-input>
+                <template slot="button">
+                    <button type="submit" name="submit">
+                        Speichern
+                    </button>
+                </template>
+            </component-form>
+        </div>
     </div>
 </template>
 
@@ -22,19 +55,34 @@ import ComponentFormInput from './../components/form/FormInput.vue';
 
 export default {
     data: () => ({
+        isLoading: true,
         profile: {
-            firstName: undefined,
-            secondName: undefined,
+            firstname: '',
+            lastname: '',
+            email: '',
+            paypalMeLink: '',
+            avatarLink: ''
         },
     }),
     methods: {
         submitHandler: function(e) {
-            console.log(this.profile.firstName);
+            console.log(this.$auth.user.name);
+
+            this.axios.put('http://localhost:8000/api/user', this.profile)
+            .catch(error => {
+                console.log('errors', error);
+            });
         }
     },
     components: {
         ComponentForm,
         ComponentFormInput
-    }
+    },
+    mounted() {
+        this.axios.get('http://localhost:8000/api/user', {}).then(response => {
+            this.isLoading = false;
+            this.profile = response.data;
+        });
+    },
 }
 </script>

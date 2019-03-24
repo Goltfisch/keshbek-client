@@ -135,8 +135,21 @@ export default {
                 };
 
                 this.showTransactionModal = false;
+
+                this.$notify({
+                    type: 'success',
+                    title: 'Transaction',
+                    text: 'Transaction was inserted successfully!'
+                });
+
             }).catch(error => {
                 console.log('errors', error);
+
+                this.$notify({
+                    type: 'error',
+                    title: 'Error',
+                    text: error.message
+                });
             });
         },
         onSaveTransaction: function(e) {
@@ -158,9 +171,21 @@ export default {
                     return item;
                 });
 
+                this.$notify({
+                    type: 'success',
+                    title: 'Transaction',
+                    text: 'Transaction was saved successfully!'
+                });
+
                 this.showEditTransactionModal = false;
             }).catch(error => {
                 console.log('errors', error);
+
+                this.$notify({
+                    type: 'error',
+                    title: 'Error',
+                    text: error.message
+                });
             });
         },
         onOpenEditModal: function(itemId) {
@@ -168,6 +193,14 @@ export default {
                 this.transaction = response.data;
                 let transaction = response.data;
                 transaction.transactionDate = moment(transaction.transactionDate.date).format('DD.MM.YYYY');
+            }).catch(error => {
+                console.log('errors', error);
+
+                this.$notify({
+                    type: 'error',
+                    title: 'Error',
+                    text: error.message
+                });
             });
 
             this.showEditTransactionModal = true;
@@ -184,18 +217,42 @@ export default {
                     this.items = this.items.filter(function(item) {
                         return item.id !== itemId;
                     });
+
+                    this.$notify({
+                        type: 'success',
+                        title: 'Transaction',
+                        text: 'Transaction was deleted successfully!'
+                    });
                 }
             }).catch(error => {
                 console.log('errors', error);
+                
+                this.$notify({
+                    type: 'error',
+                    title: 'Error',
+                    text: error.message
+                });
             });
         },
         onGenerateDemoData: function () {
             this.axios.get('http://localhost:8000/api/transaction/demo/', {}).then((response) => {
-                if(response) {
+
                     console.log('added demo data');
-                }
+                    
+                    this.$notify({
+                        type: 'success',
+                        title: 'Demodata',
+                        text: 'Demodata was inserted successfully!'
+                    });
+                
             }).catch(error => {
                 console.log('errors', error);
+
+                this.$notify({
+                    type: 'error',
+                    title: 'Error',
+                    text: error.message
+                });
             });
         }
     },

@@ -18,7 +18,7 @@
                 <tr v-for="item in items" :key="item.id">
                     <td>{{ item.creditor }}</td>
                     <td>{{ item.debitor }}</td>
-                    <td>{{ item.amount }}</td>
+                    <td>{{ item.amount | currency }}</td>
                     <td>{{ item.reason }}</td>
                     <td>{{ formatDate(item.transactionDate) }}</td>
                     <td>

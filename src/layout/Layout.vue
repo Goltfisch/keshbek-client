@@ -57,6 +57,7 @@ export default {
     .content {
         padding: 0 10%;
         margin-top: 50px;
+        margin-bottom: 90px;
     }
 
     .headline {

@@ -5,6 +5,13 @@
 npm install
 ```
 
+Create .env.development File with
+```
+VUE_APP_BASE_URI="http://localhost:8000/api"
+```
+for local development
+
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve

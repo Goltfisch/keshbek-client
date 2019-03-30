@@ -66,7 +66,7 @@ export default {
     }),
     methods: {
         submitHandler: function(e) {
-            this.axios.put('http://localhost:8000/api/user', this.profile)
+            this.axios.put(process.env.VUE_APP_BASE_URI + '/user', this.profile)
             .then((response) => {
                 this.$notify({
                     type: 'success',
@@ -88,7 +88,7 @@ export default {
         ComponentFormInput
     },
     mounted() {
-        this.axios.get('http://localhost:8000/api/user', {}).then(response => {
+        this.axios.get(process.env.VUE_APP_BASE_URI + '/user', {}).then(response => {
             this.isLoading = false;
             this.profile = response.data;
         });

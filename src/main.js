@@ -4,11 +4,21 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueAuth from '@websanova/vue-auth';
 import Notifications from 'vue-notification';
+import VueCurrencyFilter from 'vue-currency-filter'
 
 Vue.config.productionTip = false;
 
 Vue.use(VueRouter);
 Vue.use(Notifications);
+Vue.use(VueCurrencyFilter,
+    {
+    symbol : '€',
+    thousandsSeparator: '.',
+    fractionCount: 2,
+    fractionSeparator: ',',
+    symbolPosition: 'back',
+    symbolSpacing: true
+});
 
 import App from './App.vue';
 import Layout from './layout/Layout.vue';

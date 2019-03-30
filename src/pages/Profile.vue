@@ -66,11 +66,20 @@ export default {
     }),
     methods: {
         submitHandler: function(e) {
-            console.log(this.$auth.user.name);
-
             this.axios.put('http://localhost:8000/api/user', this.profile)
+            .then((response) => {
+                this.$notify({
+                    type: 'success',
+                    title: 'Profile',
+                    text: 'Profile was updated successfully!'
+                });
+            })
             .catch(error => {
-                console.log('errors', error);
+                this.$notify({
+                    type: 'error',
+                    title: 'Error',
+                    text: error.message
+                });
             });
         }
     },

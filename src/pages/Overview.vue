@@ -135,7 +135,7 @@ export default {
         }
     },
     mounted() {
-        this.axios.get('http://localhost:8000/api/transaction', {}).then(response => {
+        this.axios.get(process.env.VUE_APP_BASE_URI + '/transaction', {}).then(response => {
             this.isLoading = false;
             this.items = response.data;
         });
@@ -153,7 +153,7 @@ export default {
             this.showTransactionModal = true;
         },
         onAddTransaction: function(e) {
-            this.axios.post('http://localhost:8000/transaction', this.transaction).then((response) => {
+            this.axios.post(process.env.VUE_APP_BASE_URI + '/transaction', this.transaction).then((response) => {
                 this.items.push(response.data);
                 this.transaction = {
                     creditorId: '',
@@ -182,7 +182,7 @@ export default {
             });
         },
         onSaveTransaction: function(e) {
-            this.axios.put('http://localhost:8000/api/transaction/'+this.transaction.id, this.transaction).then((response) => {
+            this.axios.put(process.env.VUE_APP_BASE_URI + '/transaction/'+this.transaction.id, this.transaction).then((response) => {
                 this.transaction = {
                     creditorId: '',
                     debitorId: '',
@@ -218,7 +218,7 @@ export default {
             });
         },
         onOpenEditModal: function(itemId) {
-            this.axios.get('http://localhost:8000/api/transaction/'+itemId, {}).then((response) => {
+            this.axios.get(process.env.VUE_APP_BASE_URI + '/transaction/'+itemId, {}).then((response) => {
                 this.transaction = response.data;
                 let transaction = response.data;
                 transaction.transactionDate = moment(transaction.transactionDate.date).format('DD.MM.YYYY');
@@ -241,7 +241,7 @@ export default {
             this.showEditTransactionModal = false;
         },
         onDeleteClick: function (itemId) {
-            this.axios.delete('http://localhost:8000/api/transaction/'+itemId).then((response) => {
+            this.axios.delete(process.env.VUE_APP_BASE_URI + '/transaction/'+itemId).then((response) => {
                 if(response) {
                     this.items = this.items.filter(function(item) {
                         return item.id !== itemId;
@@ -264,7 +264,7 @@ export default {
             });
         },
         onGenerateDemoData: function () {
-            this.axios.get('http://localhost:8000/api/transaction/demo/', {}).then((response) => {
+            this.axios.get(process.env.VUE_APP_BASE_URI + '/transaction/demo/', {}).then((response) => {
 
                     console.log('added demo data');
                     

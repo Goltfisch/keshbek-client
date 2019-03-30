@@ -67,7 +67,7 @@ const router = new VueRouter({
 Vue.router = router;
 
 Vue.use(VueAxios, axios);
-Vue.axios.defaults.baseURL = 'http://localhost:8000/api';
+Vue.axios.defaults.baseURL = process.env.VUE_APP_BASE_URI;
 
 Vue.use(VueAuth, {
     auth: {

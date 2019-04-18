@@ -1,184 +1,151 @@
 <template>
-    <div class="login-wrapper">
-        <div v-if="Object.keys(this.errors).length" class="error-wrapper">
-                <b>Folgende Probleme sind aufgetreten:</b>
-                <ul>
-                    <li v-for="error in errors">{{ error }}</li>
-                </ul>
-        </div>
-        <div class="login-form-wrapper">
-            <h1 class="login-headline">Keshbek Login</h1>
-
-
-            <component-form :submitHandler="onLogin">
-                <component-form-input
-                    name="username"
-                    label="Benutzer"
-                    required
-                    v-model="login.username">
-                </component-form-input>
-
-                <component-form-input
-                    name="password"
-                    label="Password"
-                    type="password"
-                    required
-                    v-model="login.password">
-                </component-form-input>
-
-                <template slot="button">
-                    <button type="submit" name="submit" class="login-button">
-                        Anmelden
-                    </button>
-                </template>
-            </component-form>
-        </div>
-    </div>
+        <el-row>
+            <el-col :span="12">
+                <div class="login-background">
+                    <div class="login-wrapper">
+                        <div v-if="Object.keys(this.errors).length" class="error-wrapper">
+                                <el-alert
+                                    v-for="(error, index) in errors"
+                                    title="Fehler"
+                                    type="error"
+                                    :key="index">
+                                    {{error}}
+                                </el-alert>
+                        </div>
+                        <div class="login-form-wrapper">
+                            <h1 class="login-headline">Rote oder blaue Pille?</h1>
+                            <el-form :model="loginForm" :rules="loginFormRules" ref="loginForm">
+                                <el-form-item prop="username">
+                                    <el-input placeholder="Benutzername" v-model="loginForm.username"></el-input>
+                                </el-form-item>
+                                <el-form-item prop="password">
+                                    <el-input placeholder="Passwort" type="password" v-model="loginForm.password"></el-input>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-button type="primary" @click="submitForm('loginForm')" plain>Anmelden</el-button>
+                                </el-form-item>
+                            </el-form>
+                        </div>
+                    </div>
+                </div>
+            </el-col>
+            <el-col :span="12">
+                <div class="login-background-image">
+                    <h1>Keshbek</h1>
+                    <p>Get your Cash back!</p>
+                </div>
+            </el-col>
+        </el-row>
 </template>
 
 <script>
-import ComponentForm from './../components/form/Form.vue';
-import ComponentFormInput from './../components/form/FormInput.vue';
-
 export default {
     data() {
         return {
-            login: {
+            loginForm: {
                 username: '',
                 password: ''
             },
-            errors: []
+            errors: [],
+            loginFormRules: {
+                username: [
+                    { required: true, message: 'Bitte geben Sie einen Benutzernamen an.', trigger: 'blur' },
+                    { min: 3, message: 'Der Benutzername muss mindestens 3 Zeichen lang sein.', trigger: 'blur' }
+                ],
+                password: [
+                    { required: true, message: 'Bitte geben Sie ein Passwort an.', trigger: 'blur' },
+                    { min: 3, message: 'Das Passwort muss mindestens 3 Zeichen lang sein.', trigger: 'blur' }
+                ],
+            }
         }
     },
     methods: {
-        onLogin: function(e) {
-            e.preventDefault();
-
+        submitForm(formName) {
+            
             this.errors = {};
-
+            
             const data = {
-                username: this.login.username,
-                password: this.login.password
+                username: this.loginForm.username,
+                password: this.loginForm.password
             };
 
-            this.$auth.login({
-                data,
-                error: (e) => {
-                    var code = e.response.data.code;
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    this.$auth.login({
+                        data,
+                        error: (e) => {
+                                var code = e.response.data.code;
 
-                    if (code == 401) {
-                        this.errors["auth"] = "Der Benutzername oder das Passwort stimmen nicht.";
-                    }else {
-                        this.errors["auth"] = "Ein ungekannter Fehler ist aufgetreten.";
-                    }
+                                if (code == 401) {
+                                    this.errors["auth"] = "Der Benutzername oder das Passwort stimmen nicht.";
+                                }else {
+                                    this.errors["auth"] = "Ein unbekannter Fehler ist aufgetreten.";
+                                }
 
-                    //force update because the site wont reload automatically
-                    this.$forceUpdate();
+                                this.$forceUpdate();
+                            }
+                    });
+                } else {
+                    return false;
                 }
-            })
-        }
-    },
-    components: {
-        ComponentForm,
-        ComponentFormInput
+            });
+        },
     }
 }
 </script>
 
 <style>
-.login-wrapper {
-    height: 100%;
-    width: 100%;
-    background: url('../assets/login-background.jpg');
-    background-size: cover;
+
+.el-row {
+    background-color: #fafafe;
 }
 
-.error-wrapper {
-    width: 400px;
-    padding: 15px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
+.login-background {
+    position: relative;
+    height: 100%;
+}
+
+.login-background .login-wrapper {
+    width: 350px;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
-    top: 10%;
-}
-
-.login-headline {
-    text-align: center;
-    margin-top: 15px;
-    margin-bottom: 35px;
-    color: #3e3e3e;
-}
-
-.login-wrapper .login-form-wrapper {
-    width: 500px;
-    margin: 0 auto;
     top: 50%;
-    position: relative;
-    transform: translateY(-50%);
-    padding: 20px;
-    background: rgba(255,255,255,0.4);
-    -webkit-box-shadow: 0px 4px 10px 4px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: 0px 4px 10px 4px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 4px 10px 4px rgba(0, 0, 0, 0.3);
+    transform: translate(-50%, -50%);   
 }
 
-.login-wrapper .login-form-wrapper form {
-    width: 75%;
-    margin: 0 auto;
-}
-
-.login-wrapper .login-form-wrapper .required-text {
-    color: black;
-}
-
-.login-label {
-    font-size: 12px;
-    margin-left: 20px;
-    margin-bottom: 5px;
-    display: block;
-    color: #3e3e3e;
-}
-
-.login-input {
-    display: block;
-    width: calc(100% - 40px);
-    height: 40px;
-    border: 0;
-    margin-bottom: 20px;
-    padding: 0 20px;
-    -webkit-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
-    border: 1px solid white;
-}
-
-.login-input.has--error {
-    border-color: #a94442;
-}
-
-.login-input:focus {
-    outline: none;
-}
-
-.login-button {
+.login-background-image {
+    height: 100%;
     width: 100%;
-    height: 40px;
-    border-radius: 40px;
-    background: #0a431c;
-    border: none;
-    margin-bottom: 15px;
-    font-weight: 700;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
+    background-size: cover;
+    background-image: linear-gradient(
+      rgba(52, 75, 99, 0.6), 
+      rgba(52, 75, 99, 0.6)
+    ), url('../assets/cat-login-background.jpg');
+    background-position: right center;
 }
 
-.login-button:focus {
-    outline: none;
+.login-background-image h1 {
+    font-size: 80px;
+    text-align: right;
+    margin: 0;
+    padding: 50px 50px 0 50px;
+    color: #c4ffdd;
 }
+
+.login-background-image p {
+    font-size: 40px;
+    text-align: right;
+    margin: 0;
+    padding: 0 50px 50px 50px;
+    color: #c4ffdd;
+}
+
+.el-row, .el-col {
+    height: 100%;
+}
+
+.el-form .el-button {
+    width: 100%;
+}
+
 </style>

@@ -13,7 +13,10 @@
                                 </el-alert>
                         </div>
                         <div class="login-form-wrapper">
-                            <h1 class="login-headline">Rote oder blaue Pille?</h1>
+                            <div class="login-form-image">
+                                <img src="../assets/keshbek-logo-transparent.png" />
+                            </div>
+                            <h1 class="login-headline">Login</h1>
                             <el-form :model="loginForm" :rules="loginFormRules" ref="loginForm">
                                 <el-form-item prop="username">
                                     <el-input placeholder="Benutzername" v-model="loginForm.username"></el-input>
@@ -146,6 +149,10 @@ export default {
 
 .el-form .el-button {
     width: 100%;
+}
+
+.login-form-image {
+    text-align: center;
 }
 
 </style>

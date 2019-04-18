@@ -4,7 +4,9 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueAuth from '@websanova/vue-auth';
 import Notifications from 'vue-notification';
-import VueCurrencyFilter from 'vue-currency-filter'
+import VueCurrencyFilter from 'vue-currency-filter';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.config.productionTip = false;
 
@@ -19,6 +21,7 @@ Vue.use(VueCurrencyFilter,
     symbolPosition: 'back',
     symbolSpacing: true
 });
+Vue.use(ElementUI);
 
 import App from './App.vue';
 import Layout from './layout/Layout.vue';

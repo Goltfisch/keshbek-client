@@ -25,6 +25,7 @@ Vue.use(ElementUI);
 
 import App from './App.vue';
 import Layout from './layout/Layout.vue';
+import Dashboard from './pages/Dashboard.vue';
 import Overview from './pages/Overview.vue';
 import Login from './pages/Login.vue';
 import Profile from './pages/Profile.vue';
@@ -39,9 +40,15 @@ const routes = [
     {
         path: '/',
         component: Layout,
-        redirect: '/overview',
+        redirect: '/dashboard',
         meta: { auth: true },
         children: [
+            {
+                path: 'dashboard',
+                component: Dashboard,
+                name: 'dashboard',
+                meta: { auth: true },
+            },
             {
                 path: 'overview',
                 component: Overview,

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <component-modal v-if="showTransactionModal" @close="onCloseTransactionModal">
             <h3 slot="header">Neue Transaktion erstellen</h3>
             <div slot="body">
